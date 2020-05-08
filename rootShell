@@ -1,0 +1,35 @@
+#!/bin/bash
+
+IMAGE=freecad-build
+
+GIDS=( $(id -G) )  #All of my groups
+unset GIDS[0]      #remove primary group
+for g in "${GIDS[@]}"
+do
+    G+=" --group-add=$g"
+done
+
+#RM=""
+RM=" --rm "
+
+U=""
+#U=" --user $(id -u):$(id -g) $G"
+
+VOLS=' --volume=/etc/group:/etc/group:ro '
+VOLS+='--volume=/etc/passwd:/etc/passwd:ro '
+VOLS+='--volume=/etc/shadow:/etc/shadow:ro '
+VOLS+='--volume=/etc/sudoers.d:/etc/sudoers.d:ro '
+VOLS+='--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw '
+VOLS+="--volume=/home/${USER}:/home/${USER} "
+VOLS+='--volume=/opt:/opt '
+VOLS+='--volume=/projects:/projects '
+
+NET='--network=host '
+
+docker run $RM -it $U --env="DISPLAY" $VOLS --ipc="host" $NET \
+       -w="/home/${USER}" \
+       --hostname="mrflt-fcd" \
+       --name="freecad-build" \
+       ${IMAGE} /bin/bash
+
+
