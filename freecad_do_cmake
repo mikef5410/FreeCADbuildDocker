@@ -3,6 +3,10 @@
 #cmake -DBUILD_FEM_NETGEN=1 -DFREECAD_USE_EXTERNAL_PIVY=1 -DCMAKE_BUILD_TYPE=Release -DBoost_INCLUDE_DIRS=/usr/include/boost ..
 
 #COMPILER=" -DCMAKE_CXX_COMPILER=/usr/bin/g++-10 -DCMAKE_C_COMPILER=/usr/bin/gcc-10"
+
+FREECAD_SRC=/projects/free-cad-code
+
+
 COMPILER=""
 COMPILER+=" -DCMAKE_VERBOSE_MAKEFILE=ON "
 #COMPILER+=" -DCMAKE_CXX_FLAGS=\" -fpermissive -fno-access-control \" "
@@ -24,4 +28,4 @@ NETGEN=" -DBUILD_FEM_NETGEN=0 -D_OCC64=1 "
 
 set -x
 
-/bin/bash -c "cmake ${COMPILER} ${PYTHON} ${NETGEN} -DFREECAD_USE_EXTERNAL_PIVY=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/FreeCAD -DBoost_INCLUDE_DIRS=/usr/include/boost .."
+/bin/bash -c "cmake ${COMPILER} ${PYTHON} ${NETGEN} -DFREECAD_USE_EXTERNAL_PIVY=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/FreeCAD -DBoost_INCLUDE_DIRS=/usr/include/boost $FREECAD_SRC"
