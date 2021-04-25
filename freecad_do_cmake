@@ -4,11 +4,15 @@
 
 #COMPILER=" -DCMAKE_CXX_COMPILER=/usr/bin/g++-10 -DCMAKE_C_COMPILER=/usr/bin/gcc-10"
 
+#For realthunder, we need Coin-4.0 or later, so build libcoin with
+#prefix /opt/FreeCAD/coin4
+export PKG_CONFIG_PATH=/opt/FreeCAD/coin4/lib64/pkgconfig
+
 FREECAD_SRC=/projects/free-cad-code
 
 
 COMPILER=""
-COMPILER+=" -DCMAKE_VERBOSE_MAKEFILE=ON "
+COMPILER+=" -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_CXX_STANDARD=14 -DBUILD_ENABLE_CXX_STD:STRING=C++14 "
 #COMPILER+=" -DCMAKE_CXX_FLAGS=\" -fpermissive -fno-access-control \" "
 
 
